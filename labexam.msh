@@ -1,0 +1,55 @@
+#  labexam.msh
+#
+#  mesh file for the example
+#
+#  To run this file use:
+#     sepmesh labexam.msh
+#
+#  Creates the file meshoutput
+#
+#  Define some general constants
+#
+constants           # See Labmanual Section 3.3
+   integers
+      n = 5           # Number of elements along side
+   reals
+      rho = 1
+      R = 2
+end
+#
+#  Define the mesh
+#
+mesh2d              # See Labmanual Section 3.4
+#
+#  user points
+#
+   points           # See Labmanual Section 3.4
+      p1=(R,-rho)
+      p2=(R+rho,0)
+      p3=(R,rho)
+      p4=(R-rho,0)
+      p5=(R,0)
+#
+#  curves
+#
+   curves           # See Labmanual Section 3.4
+      c1 = ell_arc 1 (p1,p2,p5,nelm=n)
+      c2 = ell_arc 1 (p2,p3,p5,nelm=n)
+      c3 = ell_arc 1 (p3,p4,p5,nelm=n)
+      c4 = ell_arc 1 (p4,p1,p5,nelm=n)
+#
+#  surfaces
+#
+   surfaces         # See Labmanual Section 3.4
+      s1 = triangle3 (c1,c2,c3,c4)
+#
+#  Couple each surface to a different element group in order to provide
+#  different properties to the coefficients
+#
+   meshsurf           # See Labmanual Section 3.4
+      selm1 = s1
+
+   plot                           # make a plot of the mesh
+                                  # See Labmanual Section 3.4
+
+end

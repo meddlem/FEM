@@ -1,0 +1,38 @@
+# labexam.prb
+#
+#  problem file for the example
+#
+#  To run this file use:
+#     sepcomp labexam.prb
+#
+#  Reads the file meshoutput
+#
+#
+#
+#  Define the type of problem to be solved
+#
+problem                   # See Labmanual Section 4.8.1
+
+   types                       # Define types of elements,
+                               # See User Manual Section 3.2.2
+      elgrp1 = (type=1)        # Type number for surface 1
+                               # See Standard problems Section 3.1
+   natbouncond
+      bngrp1 = (type=2)
+      bngrp2 = (type=3)
+   boundelements
+	belm1 = curves(c2, c3)
+	belm2 = curves(c1, c4)
+end
+#
+#   Define the main structure of the program
+#   See Labmanual Section 4.8.3
+#
+structure
+   matrix_structure: symmetric   #  a symmetric profile matrix is used
+   solve_linear_system potential
+   print potential
+   plot_contour potential, text='Temperature'
+   plot_coloured_levels potential, text='Temperature'
+end
+end_of_sepran_input
