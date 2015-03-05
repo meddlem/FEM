@@ -1,0 +1,7 @@
+#!bin\bash
+
+sepmesh ./labexam.msh
+compile elemsubr.f90
+seplink sepcompexe
+sepcompexe < ./labexam.prb > outputfile
+sepview 
